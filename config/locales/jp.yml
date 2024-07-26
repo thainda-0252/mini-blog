@@ -1,0 +1,8 @@
+jp:
+  hello: "こんにちわ"
+  login:
+      title: "ログイン"
+  register:
+      title: "登録"
+  user: 
+      listUser: "ユーザーリスト"
