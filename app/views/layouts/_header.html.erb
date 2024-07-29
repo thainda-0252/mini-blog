@@ -1,0 +1,27 @@
+<header class="w-full">
+  <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
+      <%= link_to root_path, class: "flex items-center" do %>
+        <%= render "layouts/logo" %>
+      <% end %>
+        <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+        <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+          <li>
+            <%= link_to t("user.listUser"), users_path, class: "block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0 dark:text-white", "aria-current": "page" %>
+          </li>
+          <div class="text-white flex">
+            <%= link_to "Japanese", locale: :jp %>
+            <p class="border-l-2 ml-1 mr-1"></p>
+            <%= link_to "Vietnamese", locale: :vi %>
+          </div>
+          <div class="flex justify-center items-center ">
+              <div class="space-x-2">
+                <%= link_to t("login.title"), login_path, class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-3 rounded shadow text-decoration-none" %>
+                <%= link_to t("register.title"), register_path, class: "bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded shadow text-decoration-none" %>
+              </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

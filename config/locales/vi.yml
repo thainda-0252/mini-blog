@@ -1,0 +1,12 @@
+vi:
+  hello: 'Xin chào'
+  users:
+    create:
+      success: "Tao tai khoan thanh cong"
+    not_found: ""
+  login:
+      title: "Đăng nhập"
+  register:
+      title: "Đăng ký"
+  user: 
+      listUser: "Danh sách người dùng"

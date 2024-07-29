@@ -31,3 +31,6 @@
 /config/master.key
 /config/database.yml
 /test/*
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
