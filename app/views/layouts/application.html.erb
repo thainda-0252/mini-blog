@@ -10,10 +10,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="min-h-screen">
-    <div class="min-h-screen">
+  <body>
+    <div>
       <div class="min-h-[800px]">
         <%= render "layouts/header" %>
+        <%= render "shared/flash_message" %>
         <%= yield %>
       </div>
       <%= render "layouts/footer" %>

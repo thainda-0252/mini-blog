@@ -1,1 +1,39 @@
-<h1>Register Page</h1>
+<div class="container mx-auto">
+  <div class="flex justify-center mt-8">
+    <div class="w-2/3">
+      <%= render "shared/error_message", object: @user %>
+      <div class="mt-3 mb-4">
+        <h1 class="text-2xl font-semibold"><%= t(".title") %></h1>
+      </div>
+      <%= form_with model: @user do |form| %>
+        <div class="mt-4">
+          <%= form.label :username, t(".form.name.label"), class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :username, class: "mt-1 px-4 py-2 w-full border rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300", placeholder: t(".form.name.placeholder") %>
+        </div>
+        <div class="mt-4">
+          <%= form.label :email, t(".form.email.label"), class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :email, class: "mt-1 px-4 py-2 w-full border rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300", placeholder: t(".form.email.placeholder") %>
+        </div>
+        <div class="mt-4">
+          <%= form.label :bio, t(".form.bio.label"), class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :bio, class: "mt-1 px-4 py-2 w-full border rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300", placeholder: t(".form.bio.placeholder") %>
+        </div>
+        <div class="mt-4">
+          <%= form.label :password, t(".form.password.label"), class: "block text-sm font-medium text-gray-700" %>
+          <%= form.password_field :password, class: "mt-1 px-4 py-2 w-full border rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300", placeholder: t(".form.password.placeholder") %>
+        </div>
+        <div class="mt-4">
+          <%= form.label :password_confirmation, t(".form.confirm.label"), class: "block text-sm font-medium text-gray-700" %>
+          <%= form.password_field :password_confirmation, class: "mt-1 px-4 py-2 w-full border rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300", placeholder: t(".form.confirm.placeholder") %>
+        </div>
+        <div class="mt-4">
+          <%= form.label :profile_picture, t(".form.avatar.label"), class: "block text-sm font-medium text-gray-700" %>
+          <%= form.file_field :profile_picture %>
+        </div>
+        <div class="mt-6">
+          <%= form.submit t(".title"), class: "px-4 py-2 !bg-indigo-500 text-white rounded-md hover:bg-indigo-900 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-50" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
