@@ -1,12 +1,43 @@
 vi:
   hello: 'Xin chào'
   users:
-    create:
-      success: "Tao tai khoan thanh cong"
-    not_found: ""
-  login:
-      title: "Đăng nhập"
-  register:
+    new:
       title: "Đăng ký"
+      form:
+        name:
+          label: "Tên"
+          placeholder: "Nhập tên của bạn"
+        email:
+          label: "Email"
+          placeholder: "Nhập địa chỉ email của bạn"
+        bio:
+          label: "Tiểu sử"
+          placeholder: "Nhập tiểu sử của bạn"
+        password:
+          label: "Mật khẩu"
+          placeholder: "Nhập mật khẩu của bạn"
+        confirm:
+          label: "Xác nhận mật khẩu"
+          placeholder: "Vui lòng nhập lại mật khẩu"
+        avatar:
+          label: "Ảnh đại diện"
+    create:
+      success: "Tạo tài khoản thành công"
+    not_found: "Không tìm thấy"
+    profile: "Hồ sơ"
+    settings: "Cài đặt"
+    logout: "Đăng xuất"
+  login:
+    title: "Đăng nhập"
+    failed: "Email/mật khẩu không hợp lệ"
+    success: "Đăng nhập thành công"
+    form:
+      email: "Email"
+      password: "Mật khẩu"
   user: 
-      listUser: "Danh sách người dùng"
+    listUser: "Danh sách người dùng"
+  register:
+    title: "Đăng ký"
+    errors:
+      error_message: "Biểu mẫu chứa %{message}."
+      error: "lỗi"

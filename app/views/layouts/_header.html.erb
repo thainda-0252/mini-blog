@@ -14,13 +14,25 @@
             <p class="border-l-2 ml-1 mr-1"></p>
             <%= link_to "Vietnamese", locale: :vi %>
           </div>
-          <div class="flex justify-center items-center ">
-              <div class="space-x-2">
-                <%= link_to t("login.title"), login_path, class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-3 rounded shadow text-decoration-none" %>
-                <%= link_to t("register.title"), register_path, class: "bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded shadow text-decoration-none" %>
-              </div>
-          </div>
+
         </ul>
+        <% if logged_in? %>
+          <div class=" font-medium lg:flex-row lg:space-x-8 lg:mt-0 flex mt-2 ml-3">
+            <ul>
+              <li class: "bg-blue-500 text-white hover:bg-blue-600 px-3 py-2 rounded-md">
+                <%= link_to t("users.logout"), logout_path, class: "bg-blue-500 text-white hover:bg-blue-600 px-3 py-2 rounded-md", 
+                                       data: { "turbo-method": :delete } %>
+              </li>
+            </ul>
+          </div>
+          <% else %>
+            <div class="flex justify-center items-center ml-2">
+              <div class="space-x-2">
+                <%= link_to t("login.title"), login_path, class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-md" %>
+                <%= link_to t("register.title"), register_path, class: "bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md" %>
+              </div>
+            </div>
+        <% end %>
       </div>
     </div>
   </nav>

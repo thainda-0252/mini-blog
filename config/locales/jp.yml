@@ -1,8 +1,43 @@
 jp:
   hello: "こんにちわ"
-  login:
-      title: "ログイン"
-  register:
+  users:
+    new: 
       title: "登録"
+      form:
+        name:
+          label: "名前"
+          placeholder: "あなたの名前を入力してください"
+        email:
+          label: "Eメール"
+          placeholder: "メールアドレスを入力してください"
+        bio:
+          label: "話"
+          placeholder: "話を入力してください"
+        password:
+          label: "パスワード"
+          placeholder: "パスワードを入力してください"
+        confirm:
+          label: "パスワードを認証する"
+          placeholder: "パスワードを再入力してください"
+        avatar:
+          label: "アバター"
+    create:
+      success: "アカウントが作成されました"
+    not_found: "見つかりません"
+    profile: "ファイル"
+    settings: "設定"
+    logout: "ログアウト"
+  login:
+    title: "ログイン"
+    failed: "無効なメールアドレス/パスワード"
+    success: "正常にログインしました"
+    form:
+      email: "Eメール"
+      password: "パスワード"
   user: 
       listUser: "ユーザーリスト"
+  register:
+    title: "登録"
+    errors:
+      error_message: "フォームには %{message} が含まれています。"
+      error: "エラー"

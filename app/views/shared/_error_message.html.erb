@@ -1,0 +1,14 @@
+<% if object.errors.any? %>
+  <div id="error_explanation" class="p-4 border-l-4 border-red-500 bg-red-50 rounded-md">
+    <div class="text-red-700 font-bold mb-2">
+      <% error_count = object.errors.count %>
+      <%= t("register.errors.error_message",
+            message: pluralize(error_count, t("register.errors.error"))) %>
+    </div>
+    <ul class="list-disc pl-5 text-red-600">
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
