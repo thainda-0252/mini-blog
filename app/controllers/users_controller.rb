@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.profile_picture.attach(params[:user][:profile_picture])
     if @user.save
       reset_session
       log_in @user

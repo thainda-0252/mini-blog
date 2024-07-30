@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  UPDATABLE_ATTRS = [:username, :email, :profile_picture, :bio, :password,
-                     :password_confirmation].freeze
+  UPDATABLE_ATTRS = %i(username email bio password password_confirmation
+                       profile_picture).freeze
 
   before_save :downcase_email!
   attr_accessor :remember_token
@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :email, presence: true,
     format: {with: Settings.users.valid_email_regex},
     uniqueness: true
+  has_one_attached :profile_picture
   has_secure_password
   has_many :posts, dependent: :destroy
   has_many :active_follows, class_name: Follow.name,
