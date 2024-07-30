@@ -17,4 +17,12 @@ module SessionsHelper
     reset_session
     @current_user = nil
   end
+
+  private
+  def logged_in_user
+    return if logged_in?
+
+    flash[:danger] = t("login.please")
+    redirect_to login_url, status: :see_other
+  end
 end

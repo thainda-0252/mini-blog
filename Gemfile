@@ -81,3 +81,7 @@ end
 gem "tailwindcss-rails", "~> 2.6"
 
 gem "sass-rails"
+
+gem "faker"
+
+gem "pagy"

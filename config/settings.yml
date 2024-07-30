@@ -5,3 +5,5 @@ users:
   min_password: 8
   max_email: 255
   avatar_size: 80
+posts:
+  per_page: 8
