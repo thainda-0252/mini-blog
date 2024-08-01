@@ -268,3 +268,10 @@ vi:
   like:
     like_fail: "Không tìm thấy bài viết"
     unlike_fail: "Lỗi rồi không hủy thích được"
+  follows:
+    create:
+      success: "Theo dõi thành công"
+      fail: "Theo dõi thất bại"
+    destroy:
+      success: "Hủy theo dõi thành công"
+      fail: "Hủy theo dõi thất bại"

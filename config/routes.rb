@@ -15,5 +15,11 @@ Rails.application.routes.draw do
     resources :posts do
       resources :likes, only: [:create, :destroy]
     end
+    namespace :v1 do
+      resources :posts
+      post "/login", to: "sessions#create"
+      get "/feed", to: "posts#feed"
+      resources :follows, only: %i(create destroy)
+    end
   end
 end
