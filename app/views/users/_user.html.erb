@@ -1,3 +1,16 @@
-<div class="user-item py-2 pl-3 pr-4 bg-purple-700 rounded ">
-  <%= user.username %>
+<div class="user-item flex flex-col items-center bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+  <div class="relative h-24 w-24 mb-4">
+    <%= link_to user_path(user) do %>
+      <% if user.profile_picture.attached? %>
+        <%= image_tag user.profile_picture, class: "w-full h-full rounded-full object-cover" %>
+      <% else %>
+        <img class="w-full h-full rounded-full object-cover" src="https://vnn-imgs-f.vgcloud.vn/2020/03/23/11/trend-avatar-1.jpg" alt="Default avatar" />
+      <% end %>
+    <% end %>
+  </div>
+  <div class="text-center">
+    <%= link_to user_path(user), class: "text-lg font-semibold text-gray-800 hover:underline" do %>
+      <%= user.username %>
+    <% end %>
+  </div>
 </div>

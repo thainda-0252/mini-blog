@@ -46,9 +46,19 @@ jp:
       error_message: "フォームには %{message} が含まれています。"
       error: "エラー"
   posts:
+    delete_sure: "投稿を削除してもよろしいですか?"
+    find_fail: "記事が見つかりませんでした"
     create: "記事を作成する"
     fail: "投稿の作成に失敗しました"
     success: "成功した投稿を作成しました"
+    edit:
+      title: "投稿の編集"
+      submit: "修理"
+      success: "更新に成功"
+      fail: "アップデートに失敗しました"
+    destroy:
+      success: "正常に削除されました"
+      fail: "削除に失敗しました"
     form:
       upload_images: "写真をアップロードする"
       submit: "作成する"
@@ -239,4 +249,13 @@ jp:
       default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
-    pm: 午後
+  profile:
+    edit: "プロファイル編集"
+    post: "投稿"
+    follower: "フォロワー"
+    people: "ユーザー"
+    following: "見てる"
+    liked: "好きだった"
+    new_post: "新しい投稿"
+    follow:
+      title: "モニター"

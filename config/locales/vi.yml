@@ -46,9 +46,19 @@ vi:
       error_message: "Biểu mẫu chứa %{message}."
       error: "lỗi"
   posts:
+    delete_sure: "Bạn có chắc chắn muốn xóa bài viết không?"
+    find_fail: "Không tìm thấy bài viết"
     create: "Tạo bài viết"
     fail: "Tạo bài viết không thành công"
     success: "Tạo bài viết thành công"
+    edit:
+      title: "Sửa bài viết"
+      submit: "Sửa"
+      success: "Cập nhật thành công"
+      fail: "Cập nhật thất bại"
+    destroy:
+      success: "Xóa thành công"
+      fail: "Xóa thất bại"
     form:
       upload_images: "Tải ảnh"
       submit: "Tạo"
@@ -236,3 +246,13 @@ vi:
       long: "%d %B, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: chiều
+  profile:
+    edit: "Chỉnh sửa trang cá nhân"
+    post: "bài viết"
+    follower: "người theo dõi"
+    people: "người dùng"
+    following: "Đang theo dõi"
+    liked: "đã thích"
+    new_post: "Bài viết mới"
+    follow:
+      title: "Theo dõi"

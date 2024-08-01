@@ -1,13 +1,11 @@
 <div class="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
-  <a href="#">
-    <img class="rounded-t-lg w-full h-auto object-cover" src="https://media.sproutsocial.com/uploads/2022/05/How-to-post-on-instagram-from-pc.svg" alt="" />
-  </a>
+  <%= image_with_fallback(post, :content_url, Settings.default.post_image, "post-content-image") %>
   <div class="p-4">
-    <a href="#">
+    <div class="flex">
       <h5 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
         <%= post.caption %>
       </h5>
-    </a>
+    </div>
     <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
       <p class="font-medium">
         <%= t("posts.form.status.#{post.published? ? "published" : "unpublished"}") %>
@@ -15,9 +13,20 @@
       <p class="text-gray-400">
         <%= time_ago_in_words(post.created_at) %>
       </p>
+
     </div>
-    <div class="mt-2 text-gray-700 dark:text-gray-300">
+    <div class="mt-2 text-gray-700 dark:text-gray-300 flex justify-between items-center">
       <p><%= post.username %></p>
+      <% if current_user.id == post.user.id %>
+        <div>
+          <%= link_to edit_post_path(post) do %>
+            <i class="fa-solid fa-wrench text-green-500 hover:text-green-700 cursor-pointer mr-2"></i>
+          <% end %>
+          <%= link_to post_path(post), data: { "turbo-method": :delete, turbo_confirm: t("posts.delete_sure") } do %>
+            <i class="fa fa-trash text-red-500 hover:text-red-700 cursor-pointer"></i>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

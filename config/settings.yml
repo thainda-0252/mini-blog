@@ -7,3 +7,6 @@ users:
   avatar_size: 80
 posts:
   per_page: 8
+default:
+  avatar: "https://vnn-imgs-f.vgcloud.vn/2020/03/23/11/trend-avatar-1.jpg"
+  post_image: "https://media.sproutsocial.com/uploads/2022/05/How-to-post-on-instagram-from-pc.svg"

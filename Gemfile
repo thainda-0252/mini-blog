@@ -85,3 +85,5 @@ gem "sass-rails"
 gem "faker"
 
 gem "pagy"
+
+gem "font-awesome-sass", "~> 4.6", ">= 4.6.2"
