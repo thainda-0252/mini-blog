@@ -1,12 +1,8 @@
-
-<div class="max-w-4xl mx-auto mt-8">
+<% @user ||= current_user %>
+<div class="max-w-5xl mx-auto mt-8">
   <div class="flex items-center border-b border-gray-300 pb-4">
     <div class="relative w-32 h-32 mr-8">
-      <% if @user.profile_picture.attached? %>
-        <%= image_tag @user.profile_picture, class: "w-full h-full rounded-full object-cover" %>
-      <% else %>
-        <img class="w-full h-full rounded-full object-cover" src="https://vnn-imgs-f.vgcloud.vn/2020/03/23/11/trend-avatar-1.jpg" alt="" />
-      <% end %>
+      <%= image_with_fallback(@user, :profile_picture, Settings.default.avatar, "profile-picture") %>
     </div>
     <div>
       <div class="flex items-center mb-4">
@@ -14,25 +10,74 @@
         <% if current_user && params[:id] == current_user.id.to_s %>
           <%= link_to t("profile.edit"), "#", class: "bg-gray-200 text-black px-4 py-1 rounded mr-2" %>
         <% else %>
-          <%= link_to t("profile.follow.title"), "#", class: "bg-blue-500 text-white px-4 py-1 rounded mr-2" %>
+          <%= render "follow_form" if logged_in? %>
         <% end %>
       </div>
       <div class="flex space-x-4 mb-4">
-        <span><strong></strong> <%= t("profile.post") %></span>
-        <span><strong></strong> <%= t("profile.follower") %></span>
-        <span><%= t("profile.following") %> <strong></strong> <%= t("profile.people") %></span>
+        <span><strong id="following"><%= @user.posts.count %></strong> <%= t("profile.post") %></span>
+        <span>
+          <a href="javascript:void(0);" id="open-followers-modal", class="hover:bg-gray-200 p-1 rounded">
+            <strong id="followers"><%= @user.followers.count %></strong> <%= t("profile.follower") %>
+          </a>
+        </span>
+        <span>
+          <a href="javascript:void(0);" id="open-following-modal", class="hover:bg-gray-200 p-1 rounded">
+            <%= t("profile.following") %> <strong><%= @user.following.count %></strong> <%= t("profile.people") %>
+          </a>
+        </span>
       </div>
     </div>
   </div>
 
   <div class="mt-8">
     <div class="flex justify-around border-b border-gray-300 pb-2">
-      <%= link_to t("profile.post").upcase, posts_path, class: "text-center py-2 w-full font-semibold text-black border-b-2 border-black" %>
+      <%= link_to t("profile.post").upcase, user_path(@user), class: "text-center py-2 w-full font-semibold text-black border-b-2 border-black" %>
       <%= link_to t("profile.liked").upcase, "#", class: "text-center py-2 w-full font-semibold text-gray-500" %>
     </div>
-    
-    <div class="text-center mt-5">
-      <%= link_to t("profile.new_post"), new_post_path, class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+    <% if current_user && current_user.id == @user.id %>
+      <div class="text-center mt-7">
+        <%= link_to t("profile.new_post"), new_post_path, class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+      </div>
+    <% end %>
+    <% if @post_items.any? %>
+      <div class="container grid grid-cols-4 gap-4  pt-10">
+        <%= render @post_items %>
+      </div>
+      <div class="flex justify-center items-center my-5 p-2">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% else %>
+      <div class="p-2 text-xl mt-10 text-center font-bold text-gray-500 w-full"><%= t "profile.none_post" %></div>
+    <% end %>
+  </div>
+</div>
+<div id="followers-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+  <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+    <div class="mt-3 text-center">
+      <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t("profile.follower_list") %></h3>
+      <div class="mt-2 px-7 py-3">
+        <%= render "list_follow", items: @user.followers %>
+      </div>
+      <div class="items-center px-4 py-3">
+        <button id="close-followers-modal" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300">
+          <%= t("profile.close") %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="following-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+  <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+    <div class="mt-3 text-center">
+      <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t("profile.following_list") %></h3>
+      <div class="mt-2 px-7 py-3">
+        <%= render "list_follow", items: @user.following %>
+      </div>
+      <div class="items-center px-4 py-3">
+        <button id="close-following-modal" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300">
+          <%= t("profile.close") %>
+        </button>
+      </div>
     </div>
   </div>
 </div>

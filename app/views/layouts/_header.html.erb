@@ -1,5 +1,5 @@
 <header class="w-full">
-  <nav class="bg-white border-gray-200 py-2.5 bg-red-900">
+  <nav class="bg-white border-gray-200 py-2.5 bg-yellow-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
       <%= link_to root_path, class: "flex items-center" do %>
         <%= render "layouts/logo" %>
@@ -24,7 +24,9 @@
 
         <% if logged_in? %>
           <div class="relative h-10 w-10 mr-5 ml-5">
-            <%= image_with_fallback(current_user, :profile_picture, Settings.default.avatar, "profile-picture") %>
+            <%= link_to user_path(current_user) do %>
+              <%= image_with_fallback(current_user, :profile_picture, Settings.default.avatar, "profile-picture") %>
+            <% end %>
           </div>
           <div class=" font-medium lg:flex-row lg:space-x-8 lg:mt-0 flex mt-2 ml-3">
             <ul>

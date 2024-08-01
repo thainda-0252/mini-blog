@@ -15,4 +15,8 @@ module ApplicationHelper
       image_tag default_url, class: css_class
     end
   end
+
+  def user_owns_post? current_user, post
+    current_user.posts.find_by(id: post.id)
+  end
 end
