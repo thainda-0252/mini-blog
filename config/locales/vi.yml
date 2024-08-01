@@ -40,12 +40,14 @@ vi:
       password: "Mật khẩu"
   user: 
     listUser: "Danh sách người dùng"
+    not_found: "Không tìm thấy người dùng"
   register:
     title: "Đăng ký"
     errors:
       error_message: "Biểu mẫu chứa %{message}."
       error: "lỗi"
   posts:
+    not_found: "Không tìm thấy bài viết"
     delete_sure: "Bạn có chắc chắn muốn xóa bài viết không?"
     find_fail: "Không tìm thấy bài viết"
     create: "Tạo bài viết"
@@ -262,3 +264,6 @@ vi:
       title: "Theo dõi"
     unfollow:
       title: "Hủy theo dõi"
+  like:
+    like_fail: "Không tìm thấy bài viết"
+    unlike_fail: "Lỗi rồi không hủy thích được"

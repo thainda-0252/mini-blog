@@ -19,6 +19,8 @@ class User < ApplicationRecord
                                     dependent: :destroy
   has_many :following, through: :active_follows, source: :followee
   has_many :followers, through: :passive_follows, source: :follower
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
   class << self
     def digest string
       cost = if ActiveModel::SecurePassword.min_cost
@@ -42,6 +44,17 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def like post
+    likes.create(post_id: post.id)
+  end
+
+  def unlike post
+    likes.find_by(post_id: post.id).destroy
+  end
+
+  def liked? post
+    liked_posts.include?(post)
+  end
   private
   def downcase_email!
     email.downcase!
