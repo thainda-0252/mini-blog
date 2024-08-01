@@ -1,0 +1,25 @@
+.pagy.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagy.nav a {
+  padding: 8px 12px;
+  margin: 0 4px;
+  background-color: #4A90E2;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+  
+.pagy.nav a:hover {
+  background-color: #357ABD;
+}
+  
+.pagy.nav .current{
+  background-color: #caa917;
+  font-weight: bold;
+}
