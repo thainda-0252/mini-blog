@@ -3,7 +3,8 @@ class Post < ApplicationRecord
   UPDATABLE_ATTRS = %i(caption content_url status).freeze
   belongs_to :user
   delegate :username, to: :user
-  validates :caption, presence: true
+  validates :caption, presence: true,
+    length: {maximum: Settings.posts.max_caption}
   has_one_attached :content_url
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user

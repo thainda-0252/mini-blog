@@ -5,15 +5,22 @@ class User < ApplicationRecord
   before_save :downcase_email!
   attr_accessor :remember_token
 
+  validates :username, presence: true,
+    length: {maximum: Settings.users.max_name}
+  validates :password, presence: true,
+    length: {minimum: Settings.users.min_password},
+    format: {with: Settings.users.valid_password_regex,
+             message: I18n.t("user.valid_password")}
   validates :email, presence: true,
+    length: {maximum: Settings.users.max_email},
     format: {with: Settings.users.valid_email_regex},
     uniqueness: true
   has_one_attached :profile_picture
   has_secure_password
   has_many :posts, dependent: :destroy
   has_many :active_follows, class_name: Follow.name,
-                                  foreign_key: :follower_id,
-                                  dependent: :destroy
+                                    foreign_key: :follower_id,
+                                    dependent: :destroy
   has_many :passive_follows, class_name: Follow.name,
                                     foreign_key: :followee_id,
                                     dependent: :destroy

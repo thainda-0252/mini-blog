@@ -41,6 +41,7 @@ vi:
   user: 
     listUser: "Danh sách người dùng"
     not_found: "Không tìm thấy người dùng"
+    valid_password: "không hợp lệ"
   register:
     title: "Đăng ký"
     errors:
