@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     if @post.destroy
       flash[:success] = t "posts.destroy.success"
     else
-      flash[:danger] = t "posts.destroy.success"
+      flash[:danger] = t "posts.destroy.fail"
     end
     redirect_to posts_path, status: :see_other
   end

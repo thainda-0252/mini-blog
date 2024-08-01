@@ -1,15 +1,15 @@
 FactoryBot.define do
   factory :post do
     caption { "This is a sample caption" }
-    status { 1 }
+    status { :published }
     association :user
 
     trait :published do
-      status { 1 }
+      status { :published }
     end
 
     trait :unpublished do
-      status { 0 }
+      status { :unpublished }
     end
   end
 end
