@@ -252,10 +252,16 @@ jp:
   profile:
     edit: "プロファイル編集"
     post: "投稿"
+    none_post: "まだ投稿はありません"
     follower: "フォロワー"
     people: "ユーザー"
     following: "見てる"
     liked: "好きだった"
     new_post: "新しい投稿"
+    follower_list: "フォロワー"
+    following_list: "見てる"
+    close: "近い"
     follow:
       title: "モニター"
+    unfollow:
+      title: "フォローを解除する"

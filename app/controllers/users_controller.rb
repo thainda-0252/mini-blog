@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: %i(index show)
+
   def new
     @user = User.new
   end
@@ -22,12 +24,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by id: params[:id]
+    @posts = @user.posts.newest
+    @pagy, @post_items = pagy(@posts, limit: Settings.posts.per_page)
     return if @user
 
     flash[:danger] = t "users.not_found"
     redirect_to root_path
   end
-
   private
 
   def user_params
