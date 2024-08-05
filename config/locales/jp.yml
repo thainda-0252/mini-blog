@@ -40,12 +40,14 @@ jp:
       password: "パスワード"
   user: 
       listUser: "ユーザーリスト"
+      not_found: "ユーザーが見つかりません"
   register:
     title: "登録"
     errors:
       error_message: "フォームには %{message} が含まれています。"
       error: "エラー"
   posts:
+    not_found: "記事が見つかりませんでした"
     delete_sure: "投稿を削除してもよろしいですか?"
     find_fail: "記事が見つかりませんでした"
     create: "記事を作成する"
@@ -265,3 +267,6 @@ jp:
       title: "モニター"
     unfollow:
       title: "フォローを解除する"
+  like:
+    like_fail: "記事が見つかりませんでした"
+    unlike_fail: "間違えたので「いいね」を取り消すことができません"

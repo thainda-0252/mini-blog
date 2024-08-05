@@ -1,0 +1,16 @@
+<div class="mt-8" id="posts">
+  <div class="flex justify-around border-b border-gray-300 pb-2">
+    <%= link_to t("profile.post").upcase, user_path(@user), class: "text-center py-2 w-full font-semibold text-black" %>
+    <%= link_to t("profile.liked").upcase, liked_posts_user_path(@user), class: "text-center py-2 w-full font-semibold text-black" %>
+  </div>
+  <% if @post_items.any? %>
+    <div class="container grid grid-cols-4 gap-4 pt-10">
+      <%= render @post_items %>
+    </div>
+    <div class="flex justify-center items-center my-5 p-2">
+      <%== pagy_nav(@pagy) %>
+    </div>
+  <% else %>
+    <div class="p-2 text-xl mt-10 text-center font-bold text-gray-500 w-full"><%= t "profile.none_post" %></div>
+  <% end %>
+</div>
