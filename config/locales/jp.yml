@@ -41,6 +41,7 @@ jp:
   user: 
       listUser: "ユーザーリスト"
       not_found: "ユーザーが見つかりません"
+      valid_password: "違法"
   register:
     title: "登録"
     errors:
