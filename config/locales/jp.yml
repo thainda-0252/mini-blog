@@ -271,3 +271,10 @@ jp:
   like:
     like_fail: "記事が見つかりませんでした"
     unlike_fail: "間違えたので「いいね」を取り消すことができません"
+  follows:
+    create:
+      success: "成功の追跡"
+      fail: "失敗に従う"
+    destroy:
+      success: "フォローを解除しました"
+      fail: "フォローを解除できませんでした"
