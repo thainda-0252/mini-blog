@@ -54,6 +54,21 @@ vi:
     create: "Tạo bài viết"
     fail: "Tạo bài viết không thành công"
     success: "Tạo bài viết thành công"
+    export_to_excel: "Xuất thành file excel"
+    upload_file: "Tải lên file excel"
+    upload: "Tải lên"
+    import:
+      success: "Tải lên thành công"
+      fail: "Vui lòng chọn file"
+    export:
+      sheet_name: "posts"
+      id: "Số thứ tự"
+      creator: "Tác giả"
+      caption: "Nội dung"
+      attachment: "Tập tin đính kèm"
+      created_at: "Ngày tạo"
+      no_attachment: "Không có tệp đính kèm"
+      status: "Trạng thái"
     edit:
       title: "Sửa bài viết"
       submit: "Sửa"
@@ -269,6 +284,7 @@ vi:
     like_fail: "Không tìm thấy bài viết"
     unlike_fail: "Lỗi rồi không hủy thích được"
   follows:
+    none_follow: "Theo dõi để xem bài viết của người dùng này"
     create:
       success: "Theo dõi thành công"
       fail: "Theo dõi thất bại"

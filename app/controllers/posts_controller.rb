@@ -58,6 +58,31 @@ class PostsController < ApplicationController
     @pagy, @post_items = pagy(@post_items, limit: Settings.posts.per_page)
   end
 
+  def export
+    @posts = Post.newest
+
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        response.headers["Content-Disposition"] =
+          "attachment; filename=posts.xlsx"
+      end
+    end
+  end
+
+  def import
+    file = params[:file]
+
+    if file.present?
+      import_posts_from_file(file)
+      flash[:success] = t "posts.import.success"
+    else
+      flash[:danger] = t "posts.import.fail"
+    end
+
+    redirect_to root_path
+  end
+
   private
 
   def post_params
@@ -71,5 +96,30 @@ class PostsController < ApplicationController
 
     flash[:warning] = t "posts.find_fail"
     render :edit, status: :unprocessable_entity
+  end
+
+  def import_posts_from_file file
+    spreadsheet = Roo::Spreadsheet.open(file.path)
+    spreadsheet.row(1)
+
+    (2..spreadsheet.last_row).each do |i|
+      row = spreadsheet.row(i)
+      post_params = {
+        caption: row[2],
+        status: row[4],
+        created_at: row[5]
+      }
+      create_post_from_params(post_params)
+    end
+  end
+
+  def create_post_from_params post_params
+    post = current_user.posts.build(post_params)
+
+    if params[:post] && params[:post][:content_url].present?
+      post.content_url.attach(params[:post][:content_url])
+    end
+
+    post.save
   end
 end
