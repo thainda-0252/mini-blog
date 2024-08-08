@@ -5,7 +5,9 @@ module ApplicationHelper
     return unless object.errors.any? &&
                   object.errors.messages[field_name].present?
 
-    object.errors.messages[field_name].join(", ")
+    object.errors.messages[field_name].map do |msg|
+      I18n.t("errors.format", attribute: field_name.to_s.humanize, message: msg)
+    end.join(", ")
   end
 
   def image_with_fallback record, attachment_name, default_url, css_class

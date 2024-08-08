@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  subject { build(:user) }
+  let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
+  let(:post) { create(:post) }
 
   describe "validations" do
     required_attributes = %i(username email password)
@@ -80,6 +82,106 @@ RSpec.describe User, type: :model do
           expect(user.email).to eq("")
         end
       end
+    end
+  end
+
+  describe ".digest" do
+    let(:password) { "Aa@123456" }
+    let(:cost) { BCrypt::Engine.cost }
+
+    it "returns a hashed password with the correct cost" do
+      # Mocking the cost setting to ensure we can test against it
+      allow(BCrypt::Engine).to receive(:cost).and_return(cost)
+
+      hash = User.digest(password)
+      expect(BCrypt::Password.new(hash)).to be_a(BCrypt::Password)
+      expect(hash).to match(/\A\$2a\$/)  # Check for valid bcrypt hash prefix
+    end
+
+    context "when min_cost is false" do
+      before do
+        allow(ActiveModel::SecurePassword).to receive(:min_cost).and_return(false)
+      end
+
+      it "uses the default cost for hashing" do
+        hash = User.digest(password)
+        expect(hash).to match(/\A\$2a\$#{cost}/)
+      end
+    end
+  end
+
+  describe ".ransackable_attributes" do
+    it "returns the correct list of attributes" do
+      expected_attributes = %w(username email created_at)
+      expect(User.ransackable_attributes).to match_array(expected_attributes)
+    end
+  end
+
+  describe "#follow" do
+    it "follows another user" do
+      expect {
+        user.follow(other_user)
+      }.to change(user.following, :count).by(1)
+      expect(user.following).to include(other_user)
+    end
+
+    it "does not follow self" do
+      expect {
+        user.follow(user)
+      }.not_to change(user.following, :count)
+    end
+  end
+
+  describe "#unfollow" do
+    before { user.follow(other_user) }
+
+    it "unfollows another user" do
+      expect {
+        user.unfollow(other_user)
+      }.to change(user.following, :count).by(-1)
+      expect(user.following).not_to include(other_user)
+    end
+  end
+
+  describe "#following?" do
+    it "returns true if following another user" do
+      user.follow(other_user)
+      expect(user.following?(other_user)).to be_truthy
+    end
+
+    it "returns false if not following another user" do
+      expect(user.following?(other_user)).to be_falsey
+    end
+  end
+
+  describe "#like" do
+    it "likes a post" do
+      expect {
+        user.like(post)
+      }.to change(user.likes, :count).by(1)
+      expect(user.liked_posts).to include(post)
+    end
+  end
+
+  describe "#unlike" do
+    before { user.like(post) }
+
+    it "unlikes a post" do
+      expect {
+        user.unlike(post)
+      }.to change(user.likes, :count).by(-1)
+      expect(user.liked_posts).not_to include(post)
+    end
+  end
+
+  describe "#liked?" do
+    it "returns true if liked a post" do
+      user.like(post)
+      expect(user.liked?(post)).to be_truthy
+    end
+
+    it "returns false if not liked a post" do
+      expect(user.liked?(post)).to be_falsey
     end
   end
 end

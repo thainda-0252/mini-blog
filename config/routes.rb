@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       post "/login", to: "sessions#create"
       get "/feed", to: "posts#feed"
       resources :follows, only: %i(create destroy)
+      resources :users
     end
   end
 end

@@ -15,13 +15,16 @@
           <li>
             <%= link_to t("user.listUser"), users_path, class: "block py-2 pl-3 pr-4 text-white rounded lg:bg-transparent lg:p-0 text-white", "aria-current": "page" %>
           </li>
-          <div class="text-white flex">
-            <%= link_to "Japanese", locale: :jp %>
-            <p class="border-l-2 ml-1 mr-1"></p>
-            <%= link_to "Vietnamese", locale: :vi %>
+          <div class="flex">
+            <%= link_to locale: :jp do %>
+              <img src="<%= asset_path("jp_flag.png") %>" alt="Japanese" class="h-6 w-8">
+            <% end %>
+            <p class="border-l-2 mx-1"></p>
+            <%= link_to locale: :vi do %>
+              <img src="<%= asset_path("vi_flag.jpg") %>" alt="Vietnamese" class="h-6 w-8">
+            <% end %>
           </div>
         </ul>
-
         <% if logged_in? %>
           <div class="relative h-10 w-10 mr-5 ml-5">
             <%= link_to user_path(current_user) do %>

@@ -76,6 +76,13 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
+  describe "GET #new" do
+    it "render the new template" do
+      get :new
+      expect(response).to render_template(:new)
+    end
+  end
+
   describe "POST #create" do
     let(:valid_params) { attributes_for(:post, content_url: fixture_file_upload(Rails.root.join("spec/fixtures/files/test_image.jpeg"), "image/jpeg")) }
     let(:invalid_params) { attributes_for(:post, caption: "") }
@@ -238,6 +245,70 @@ RSpec.describe PostsController, type: :controller do
       pagy, post_items = assigns(:pagy), assigns(:post_items)
       expect(pagy).to be_a(Pagy)
       expect(post_items.size).to be <= Settings.posts.per_page
+    end
+  end
+
+  describe "GET #export" do
+    let!(:posts) { create_list(:post, 3) }
+
+    context "when requesting XLSX format" do
+      before do
+        get :export, format: :xlsx
+      end
+
+      it "responds with the correct headers" do
+        expect(response.headers["Content-Disposition"]).to include("attachment; filename=posts.xlsx")
+      end
+
+      it "has a successful response" do
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  describe "POST #import" do
+  let(:file) { fixture_file_upload('posts.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') }
+  let(:user) { create(:user) }
+  let(:service) { instance_double("ImportPostsService") }
+  let(:errors) { [] }
+  let(:file_fail) { fixture_file_upload('test_image.jpeg') }
+
+    context "when file is not present" do
+      before do
+        post :import
+      end
+
+      it "sets flash[:danger] and redirects to root_path" do
+        expect(flash[:danger]).to eq(I18n.t("posts.import.fail"))
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context "when file is present" do
+      context "when import is successful" do
+        before do
+          allow(ImportPostsService).to receive(:new).and_return(service)
+          allow(service).to receive(:import).and_return({errors: []})
+          post :import, params: { file: file }
+        end
+
+        it "sets flash[:success] and redirects to root_path" do
+          expect(flash[:success]).to eq(I18n.t("posts.import.success"))
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context "when import fails" do
+        before do
+          allow(service).to receive(:import).and_return(I18n.t("posts.import.invalid_file_type"))
+          post :import, params: { file: file_fail }
+        end
+
+        it "sets flash[:danger] with the invalid file type error message and redirects to root_path" do
+          expect(flash[:danger]).to eq(I18n.t("posts.import.invalid_file_type"))
+          expect(response).to redirect_to(root_path)
+        end
+      end
     end
   end
 end

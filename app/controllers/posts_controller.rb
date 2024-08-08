@@ -71,11 +71,10 @@ class PostsController < ApplicationController
   end
 
   def import
-    file = params[:file]
-    if file.present?
-      check_file file
+    if params[:file].present?
+      handle_file_import
     else
-      flash[:danger] = t "posts.import.fail"
+      flash[:danger] = t("posts.import.fail")
     end
 
     redirect_to root_path
@@ -109,62 +108,22 @@ class PostsController < ApplicationController
     render :edit, status: :unprocessable_entity
   end
 
-  def import_posts_from_file file
-    spreadsheet = Roo::Spreadsheet.open(file.path)
-    spreadsheet.row(1)
-    post_params_list = []
-
-    (2..spreadsheet.last_row).each do |i|
-      row = spreadsheet.row(i)
-      post_params = {
-        user_id: current_user.id,
-        caption: row[2],
-        content_url: row[3],
-        status: row[4],
-        created_at: row[5]
-      }
-      post_params_list << post_params
-    end
-
-    Post.insert_all(post_params_list)
-    post_params_list.each do |params|
-      download_and_attach_image(params) if params[:content_url].present?
+  def handle_file_import
+    service = ImportPostsService.new(params[:file], current_user)
+    result = service.import
+    if result
+      handle_import_success(result)
+    else
+      handle_import_failure(service)
     end
   end
 
-  def download_and_attach_image params
-    post = find_post(params)
-    return unless post
-
-    file = download_image(params[:content_url])
-    return unless file
-
-    attach_file_to_post(post, file, params[:content_url])
+  def handle_import_success result
+    flash[:success] = t("posts.import.success")
+    flash[:warning] = result[:errors]
   end
 
-  def find_post params
-    Post.find_by(user_id: params[:user_id], created_at: params[:created_at])
-  end
-
-  def download_image content_url
-    return if content_url.blank?
-
-    URI.parse(content_url).open
-  rescue OpenURI::HTTPError => e
-    log_error("posts.errors.download_image_failed", content_url, e)
-    nil
-  rescue StandardError => e
-    log_error("posts.errors.general_error", nil, e)
-    nil
-  end
-
-  def attach_file_to_post post, file, content_url
-    filename = File.basename(URI.parse(content_url).path)
-    post.content_url.attach(io: file, filename:)
-  end
-
-  def log_error key, url, error
-    message = I18n.t(key, url:, message: error.message)
-    Rails.logger.error(message)
+  def handle_import_failure service
+    flash[:danger] = service.error_message
   end
 end

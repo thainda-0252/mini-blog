@@ -101,3 +101,7 @@ gem "caxlsx_rails"
 gem "roo"
 
 gem "open-uri"
+
+gem "simplecov", require: false, group: :test
+
+gem "ransack"

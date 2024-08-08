@@ -11,6 +11,7 @@ class LikesController < ApplicationController
       end
     else
       flash[:danger] = t "like.like_fail"
+      redirect_to root_path
     end
   end
 
@@ -25,6 +26,7 @@ class LikesController < ApplicationController
       end
     else
       flash[:danger] = t "like.unlike_fail"
+      redirect_to root_path
     end
   end
 end

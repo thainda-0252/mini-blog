@@ -42,6 +42,13 @@ jp:
       listUser: "ユーザーリスト"
       not_found: "ユーザーが見つかりません"
       valid_password: "違法"
+      search:
+        username: "名前"
+        created_after: "日付以降に作成されました"
+        created_before: "日付より前に作成されました"
+        submit: "検索"
+        clear: "リフレッシュ"
+        out_of_range: "ページは存在しません"
   register:
     title: "登録"
     errors:
@@ -65,6 +72,8 @@ jp:
     import:
       success: "アップロードに成功しました"
       fail: "ファイルを選択してください"
+      missing_caption: "行番号 %{row_number} のコンテンツが欠落しています"
+      no_data: "有効な記録がありません"
     export:
       id: "番号順"
       creator: "著者"
@@ -294,6 +303,7 @@ jp:
     create:
       success: "成功の追跡"
       fail: "失敗に従う"
+      already_followed: "このユーザーをフォローしました"
     destroy:
       success: "フォローを解除しました"
       fail: "フォローを解除できませんでした"
