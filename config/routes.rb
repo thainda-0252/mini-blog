@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     end
     resources :follows, only: %i(create destroy)
     resources :posts do
+      collection do
+        get :export
+        post :import
+      end
       resources :likes, only: [:create, :destroy]
     end
     namespace :v1 do

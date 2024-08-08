@@ -1,0 +1,23 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: I18n.t("posts.export.sheet_name")) do |sheet|
+  sheet.add_row [
+    I18n.t("posts.export.id"),
+    I18n.t("posts.export.creator"),
+    I18n.t("posts.export.caption"),
+    I18n.t("posts.export.attachment"),
+    I18n.t("posts.export.status"),
+    I18n.t("posts.export.created_at")
+  ]
+
+  @posts.each do |post|
+    attachment_url = post.content_url.attached? ? url_for(post.content_url) : I18n.t("posts.export.no_attachment")
+    sheet.add_row [
+      post.id,
+      post.user.username,
+      post.caption,
+      attachment_url,
+      post.status,
+      post.created_at
+    ]
+  end
+end

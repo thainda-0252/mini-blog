@@ -3,6 +3,8 @@ class FollowsController < ApplicationController
 
   def create
     @user = User.find(params[:followee_id])
+    @posts = @user.posts.newest
+    @pagy, @post_items = pagy @posts, limit: Settings.posts.per_page
     current_user.follow(@user)
     respond_to do |format|
       format.html{redirect_to @user}

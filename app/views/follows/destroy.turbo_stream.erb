@@ -4,3 +4,6 @@
 <%= turbo_stream.update "followers" do %>
   <%= @user.followers.count %>
 <% end %>
+<%= turbo_stream.update "profile-content" do %>
+  <div class="p-2 text-xl mt-10 text-center font-bold text-gray-500 w-full"><%= t "follows.none_follow" %></div>
+<% end %>
