@@ -54,6 +54,24 @@ jp:
     create: "記事を作成する"
     fail: "投稿の作成に失敗しました"
     success: "成功した投稿を作成しました"
+    export_to_excel: "Excelファイルにエクスポート"
+    upload_file: "Excelファイルをアップロードする"
+    upload: "アップロード"
+    no_attachment: "添付ファイルはありません"
+    sheet_name: "posts"
+    errors:
+      download_image_failed: "URL %{url} から画像を読み込めません: %{message}"
+      general_error: "画像のダウンロードと添付中にエラーが発生しました: %{message}"
+    import:
+      success: "アップロードに成功しました"
+      fail: "ファイルを選択してください"
+    export:
+      id: "番号順"
+      creator: "著者"
+      caption: "コンテンツ"
+      attachment: "添付ファイル"
+      created_at: "作成日"
+      status: "状態"
     edit:
       title: "投稿の編集"
       submit: "修理"
@@ -272,6 +290,7 @@ jp:
     like_fail: "記事が見つかりませんでした"
     unlike_fail: "間違えたので「いいね」を取り消すことができません"
   follows:
+    none_follow: "フォローするとこのユーザーの投稿が表示されます"
     create:
       success: "成功の追跡"
       fail: "失敗に従う"

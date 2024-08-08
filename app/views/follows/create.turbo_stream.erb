@@ -2,5 +2,8 @@
   <%= render partial: "users/unfollow" %>
 <% end %>
 <%= turbo_stream.update "followers" do %>
-  <%= @user.followers.count
-%> <% end %>
+  <%= @user.followers.count %>
+<% end %>
+<%= turbo_stream.update "profile-content" do %>
+  <%= render "users/posts_list" %>
+<% end %>
