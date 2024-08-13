@@ -1,0 +1,16 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: I18n.t("posts.sheet_name")) do |sheet|
+  sheet.add_row I18n.t("posts.export").values
+
+  @posts.each do |post|
+    attachment_url = post.content_url.attached? ? rails_blob_url(post.content_url, only_path: false) : I18n.t("posts.no_attachment")
+    sheet.add_row [
+      post.id,
+      post.username,
+      post.caption,
+      attachment_url,
+      post.status,
+      post.created_at
+    ]
+  end
+end
