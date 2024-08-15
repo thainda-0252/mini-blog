@@ -42,6 +42,13 @@ vi:
     listUser: "Danh sách người dùng"
     not_found: "Không tìm thấy người dùng"
     valid_password: "không hợp lệ"
+    search:
+      username: "Tên"
+      created_after: "Tạo sau ngày"
+      created_before: "Tạo trước ngày"
+      submit: "Tìm kiếm"
+      clear: "Làm mới"
+      out_of_range: "Trang không tồn tại"
   register:
     title: "Đăng ký"
     errors:
@@ -63,6 +70,8 @@ vi:
       download_image_failed: "Không tải được hình ảnh từ URL %{url}: %{message}"
       general_error: "Đã xảy ra lỗi khi tải xuống và đính kèm hình ảnh: %{message}"
     import:
+      missing_caption: "Thiếu nội dung ở dòng số %{row_number}"
+      no_data: "Không có bản ghi nào hợp lệ"
       success: "Tải lên thành công"
       fail: "Vui lòng chọn file"
       invalid_file_type: "Vui lòng chọn định dạng file xlsx"
@@ -292,6 +301,7 @@ vi:
     create:
       success: "Theo dõi thành công"
       fail: "Theo dõi thất bại"
+      already_followed: "Đã theo dõi người dùng này"
     destroy:
       success: "Hủy theo dõi thành công"
       fail: "Hủy theo dõi thất bại"

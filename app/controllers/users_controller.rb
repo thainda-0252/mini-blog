@@ -6,8 +6,9 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
-    @pagy, @user_items = pagy @users, limit: Settings.users.per_page
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true)
+    @pagy, @user_items = pagy(@users, limit: Settings.users.per_page)
   end
 
   def create

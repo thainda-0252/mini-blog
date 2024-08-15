@@ -4,12 +4,23 @@ class V1::FollowsController < ApplicationController
 
   def create
     @user = User.find_by(id: params[:followee_id])
-    if @user && current_user.follow(@user)
-      render json: {success: true, message: I18n.t("follows.create.success"),
-                    user: UserSerializer.new(@user)}, status: :created
+
+    if @user
+      if current_user.following?(@user)
+        render json: {success: false,
+                      message: I18n.t("follows.create.already_followed")},
+               status: :unprocessable_entity
+      elsif current_user.follow(@user)
+        render json: {success: true, message: I18n.t("follows.create.success"),
+                      user: UserSerializer.new(@user)}, status: :created
+      else
+        render json: {success: false, message: I18n.t("follows.create.fail")},
+               status: :unprocessable_entity
+      end
     else
-      render json: {success: false, message: I18n.t("follows.create.fail")},
-             status: :unprocessable_entity
+      render json: {success: false,
+                    message: I18n.t("follows.create.user_not_found")},
+             status: :not_found
     end
   end
 

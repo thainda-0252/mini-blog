@@ -37,6 +37,10 @@ class User < ApplicationRecord
              end
       BCrypt::Password.create string, cost:
     end
+
+    def ransackable_attributes _auth_object = nil
+      %w(username email created_at)
+    end
   end
 
   def follow other_user
